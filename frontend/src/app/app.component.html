@@ -1,0 +1,30 @@
+<div class="page-shell">
+  <header class="hero-card">
+    <div>
+      <p class="eyebrow">Bank of Veyda</p>
+      <h1>{{ title }}</h1>
+      <p class="subtitle">{{ tagline }}</p>
+    </div>
+    <div class="status-pill">Sandbox mode</div>
+  </header>
+
+  <section class="metrics-grid">
+    <article class="metric-card" *ngFor="let metric of metrics">
+      <span class="metric-value">{{ metric.value }}</span>
+      <span class="metric-label">{{ metric.label }}</span>
+    </article>
+  </section>
+
+  <section class="info-card">
+    <h2>Core fintech simulation</h2>
+    <p>
+      This Angular app is set up for a compliance-oriented banking simulation with account lifecycle,
+      risk scoring, KYC status, and audit-ready dashboards.
+    </p>
+    <ul>
+      <li>Temporary account issuance</li>
+      <li>Risk engine & monitoring</li>
+      <li>RegTech dashboard-ready UI</li>
+    </ul>
+  </section>
+</div>

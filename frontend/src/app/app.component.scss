@@ -1,0 +1,94 @@
+.page-shell {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 3rem;
+}
+
+.hero-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  backdrop-filter: blur(18px);
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  line-height: 1.05;
+}
+
+.subtitle {
+  margin: 1rem 0 0;
+  max-width: 42rem;
+  color: #d3d7ff;
+  font-size: 1.05rem;
+}
+
+.status-pill {
+  padding: 0.75rem 1rem;
+  background: rgba(79, 70, 229, 0.16);
+  color: #c7d2fe;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  align-self: start;
+}
+
+.metrics-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin: 2rem 0;
+}
+
+.metric-card {
+  padding: 1.25rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.metric-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.metric-label {
+  display: block;
+  margin-top: 0.75rem;
+  color: #bfc7ff;
+}
+
+.info-card {
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+}
+
+.info-card h2 {
+  margin-top: 0;
+}
+
+.info-card ul {
+  margin: 1rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.info-card li {
+  margin: 0.5rem 0;
+}
