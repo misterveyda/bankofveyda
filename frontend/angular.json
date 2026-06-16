@@ -73,5 +73,8 @@
       }
     }
   },
-  "defaultProject": "bankofveyda-frontend"
+  "defaultProject": "bankofveyda-frontend",
+  "cli": {
+    "analytics": "018a3200-0b97-4344-b8a5-a6aa1cd436b5"
+  }
 }
