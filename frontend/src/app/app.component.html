@@ -8,6 +8,55 @@
     <div class="status-pill">Sandbox mode</div>
   </header>
 
+  <section class="create-account-card">
+    <h2>Create a Burner Account</h2>
+    <form (ngSubmit)="createAccount()" class="create-account-form">
+      <label>
+        Account holder name
+        <input type="text" [(ngModel)]="accountHolderName" name="accountHolderName" required />
+      </label>
+
+      <label>
+        TTL (days)
+        <input type="number" [(ngModel)]="ttlDays" name="ttlDays" min="1" max="90" required />
+      </label>
+
+      <button type="submit">Create Account</button>
+    </form>
+
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </section>
+
+  <section *ngIf="createdAccount" class="account-card">
+    <h2>Account Created</h2>
+    <dl>
+      <div>
+        <dt>ID</dt>
+        <dd>{{ createdAccount.id }}</dd>
+      </div>
+      <div>
+        <dt>Account Number</dt>
+        <dd>{{ createdAccount.account_number }}</dd>
+      </div>
+      <div>
+        <dt>Routing Number</dt>
+        <dd>{{ createdAccount.routing_number }}</dd>
+      </div>
+      <div>
+        <dt>Status</dt>
+        <dd>{{ createdAccount.status }}</dd>
+      </div>
+      <div>
+        <dt>Expires</dt>
+        <dd>{{ createdAccount.expires_at | date:'medium' }}</dd>
+      </div>
+      <div>
+        <dt>Risk Score</dt>
+        <dd>{{ createdAccount.risk_score }}</dd>
+      </div>
+    </dl>
+  </section>
+
   <section class="metrics-grid">
     <article class="metric-card" *ngFor="let metric of metrics">
       <span class="metric-value">{{ metric.value }}</span>

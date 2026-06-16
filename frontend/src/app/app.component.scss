@@ -47,6 +47,56 @@ h1 {
   align-self: start;
 }
 
+.create-account-card,
+.account-card,
+.info-card {
+  border-radius: 24px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.create-account-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.create-account-form label {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.create-account-form input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(15, 23, 42, 0.8);
+  color: white;
+}
+
+button {
+  width: fit-content;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  border: none;
+  background: #4f46e5;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover {
+  background: #4338ca;
+}
+
+.error-message {
+  color: #fda4af;
+  font-weight: 600;
+}
+
 .metrics-grid {
   display: grid;
   gap: 1rem;
@@ -55,7 +105,7 @@ h1 {
 }
 
 .metric-card {
-  padding: 1.25rem;
+  padding: 1.5rem;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -63,7 +113,7 @@ h1 {
 
 .metric-value {
   display: block;
-  font-size: 2rem;
+  font-size: 1.9rem;
   font-weight: 700;
 }
 
@@ -73,22 +123,22 @@ h1 {
   color: #bfc7ff;
 }
 
-.info-card {
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
+.account-card dl {
+  display: grid;
+  gap: 0.75rem;
 }
 
-.info-card h2 {
-  margin-top: 0;
+.account-card dt {
+  font-weight: 700;
 }
 
-.info-card ul {
-  margin: 1rem 0 0;
-  padding-left: 1.25rem;
+.account-card dd {
+  margin: 0;
+  color: #e2e8f0;
 }
 
-.info-card li {
-  margin: 0.5rem 0;
+@media (max-width: 720px) {
+  .hero-card {
+    flex-direction: column;
+  }
 }

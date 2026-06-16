@@ -1,35 +1,37 @@
 """Application configuration and settings."""
 
-from pydantic_settings import BaseSettings
 from functools import lru_cache
+from typing import Optional
+
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
     # Database
-    database_url: str
+    database_url: str = "sqlite:///./bankofveyda.db"
     database_echo: bool = False
 
     # FastAPI
     debug: bool = True
-    secret_key: str
+    secret_key: str = "dev-secret-key"
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
 
     # Sandbox APIs
-    stripe_api_key: str
-    stripe_webhook_secret: str
-    onfido_api_token: str
+    stripe_api_key: Optional[str] = None
+    stripe_webhook_secret: Optional[str] = None
+    onfido_api_token: Optional[str] = None
     onfido_sandbox_url: str = "https://api.sandbox.onfido.com"
-    plaid_client_id: str
-    plaid_secret: str
+    plaid_client_id: Optional[str] = None
+    plaid_secret: Optional[str] = None
     plaid_env: str = "sandbox"
 
     # Twilio
-    twilio_account_sid: str
-    twilio_auth_token: str
-    twilio_from_number: str
+    twilio_account_sid: Optional[str] = None
+    twilio_auth_token: Optional[str] = None
+    twilio_from_number: Optional[str] = None
 
     # Redis
     redis_url: str = "redis://localhost:6379/0"

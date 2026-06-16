@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BankService, BurnerAccount, CreateAccountRequest } from './bank.service';
 
 @Component({
   selector: 'app-root',
@@ -14,4 +15,35 @@ export class AppComponent {
     { label: 'Audit alerts', value: 14 },
     { label: 'KYC failures', value: 5 }
   ];
+
+  accountHolderName = '';
+  ttlDays = 30;
+  createdAccount: BurnerAccount | null = null;
+  errorMessage = '';
+
+  constructor(private bankService: BankService) {}
+
+  createAccount(): void {
+    this.errorMessage = '';
+    this.createdAccount = null;
+
+    const payload: CreateAccountRequest = {
+      account_holder_name: this.accountHolderName,
+      ttl_days: this.ttlDays,
+    };
+
+    this.bankService.createBurnerAccount(payload).subscribe({
+      next: (account) => {
+        this.createdAccount = account;
+        this.accountHolderName = '';
+      },
+      error: (error) => {
+        console.error('Account creation failed', error);
+        this.errorMessage =
+          error?.error?.detail ||
+          error?.message ||
+          'Unable to create account. Confirm that the backend is running and accessible.';
+      }
+    });
+  }
 }
