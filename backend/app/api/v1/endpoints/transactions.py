@@ -10,9 +10,10 @@ from app.models.account import BurnerAccount, AccountStatus
 from app.models.transaction import Transaction, TransactionStatus
 from app.schemas.account import TransactionRequest, TransactionResponse
 from app.utils import generate_account_number
+from app.utils.security import get_current_active_user
 
 logger = logging.getLogger(__name__)
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(get_current_active_user)])
 
 
 @router.post("/{account_id}/submit", response_model=TransactionResponse, status_code=status.HTTP_201_CREATED)

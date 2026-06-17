@@ -4,12 +4,31 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import logging
 
-from app.database import Base, engine
+from app.database import Base, engine, SessionLocal
 from app.config import get_settings
 from app.api.v1.router import router as v1_router
+from app.models.user import User
+from app.utils.security import hash_password
 
 settings = get_settings()
 logger = logging.getLogger(__name__)
+
+
+def create_initial_user() -> None:
+    """Seed a demo user for prototype testing."""
+    db = SessionLocal()
+    try:
+        if not db.query(User).first():
+            demo_user = User(
+                username="demo",
+                email="demo@example.com",
+                hashed_password=hash_password("demo123"),
+            )
+            db.add(demo_user)
+            db.commit()
+            logger.info("Created prototype demo user: demo / demo123")
+    finally:
+        db.close()
 
 
 def create_app() -> FastAPI:
@@ -17,6 +36,7 @@ def create_app() -> FastAPI:
     
     # Create database tables
     Base.metadata.create_all(bind=engine)
+    create_initial_user()
     
     # Initialize FastAPI app
     app = FastAPI(

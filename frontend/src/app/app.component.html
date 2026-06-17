@@ -8,7 +8,27 @@
     <div class="status-pill">Sandbox mode</div>
   </header>
 
-  <section class="create-account-card">
+  <section class="auth-card">
+    <h2>Sign in</h2>
+    <form (ngSubmit)="login()" class="auth-form">
+      <label>
+        Username
+        <input type="text" [(ngModel)]="username" name="username" required />
+      </label>
+
+      <label>
+        Password
+        <input type="password" [(ngModel)]="password" name="password" required />
+      </label>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="success-message" *ngIf="isAuthenticated">{{ authMessage || 'Logged in successfully. You can now create a burner account.' }}</div>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </section>
+
+  <section class="create-account-card" *ngIf="isAuthenticated">
     <h2>Create a Burner Account</h2>
     <form (ngSubmit)="createAccount()" class="create-account-form">
       <label>
@@ -25,6 +45,14 @@
     </form>
 
     <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </section>
+
+  <section class="create-account-card" *ngIf="!isAuthenticated">
+    <p>Please login using the prototype credentials below before creating a burner account.</p>
+    <ul>
+      <li><strong>Username:</strong> demo</li>
+      <li><strong>Password:</strong> demo123</li>
+    </ul>
   </section>
 
   <section *ngIf="createdAccount" class="account-card">

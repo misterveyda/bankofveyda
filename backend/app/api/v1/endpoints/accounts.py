@@ -18,7 +18,10 @@ from app.services.kyc_service import KYCService
 from app.utils import generate_account_number, generate_routing_number
 
 logger = logging.getLogger(__name__)
-router = APIRouter()
+from app.utils.security import get_current_active_user
+from app.models.user import User
+
+router = APIRouter(dependencies=[Depends(get_current_active_user)])
 
 account_service = AccountService()
 kyc_service = KYCService()

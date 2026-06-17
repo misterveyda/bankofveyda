@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
@@ -37,14 +37,54 @@ export interface BurnerAccount {
 })
 export class BankService {
   private apiUrl = environment.apiUrl;
+  private authToken?: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.authToken = localStorage.getItem('auth_token') ?? undefined;
+  }
+
+  private getAuthHeaders(): HttpHeaders {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    if (this.authToken) {
+      headers = headers.set('Authorization', `Bearer ${this.authToken}`);
+    }
+    return headers;
+  }
+
+  login(username: string, password: string): Observable<Token> {
+    const body = new HttpParams()
+      .set('username', username)
+      .set('password', password)
+      .set('grant_type', 'password');
+
+    return this.http.post<Token>(`${this.apiUrl}/auth/token`, body.toString(), {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }),
+    });
+  }
+
+  setToken(token: string): void {
+    this.authToken = token;
+    localStorage.setItem('auth_token', token);
+  }
+
+  clearToken(): void {
+    this.authToken = undefined;
+    localStorage.removeItem('auth_token');
+  }
+
+  getToken(): string | undefined {
+    return this.authToken;
+  }
 
   createBurnerAccount(request: CreateAccountRequest): Observable<BurnerAccount> {
-    return this.http.post<BurnerAccount>(`${this.apiUrl}/accounts/create`, request);
+    return this.http.post<BurnerAccount>(`${this.apiUrl}/accounts/create`, request, {
+      headers: this.getAuthHeaders(),
+    });
   }
 
   getAccount(accountId: string): Observable<BurnerAccount> {
-    return this.http.get<BurnerAccount>(`${this.apiUrl}/accounts/${accountId}`);
+    return this.http.get<BurnerAccount>(`${this.apiUrl}/accounts/${accountId}`, {
+      headers: this.getAuthHeaders(),
+    });
   }
 }

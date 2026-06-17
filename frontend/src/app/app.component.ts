@@ -16,12 +16,34 @@ export class AppComponent {
     { label: 'KYC failures', value: 5 }
   ];
 
+  username = 'demo';
+  password = 'demo123';
   accountHolderName = '';
   ttlDays = 30;
   createdAccount: BurnerAccount | null = null;
   errorMessage = '';
+  authMessage = '';
+  isAuthenticated = false;
 
-  constructor(private bankService: BankService) {}
+  constructor(private bankService: BankService) {
+    this.isAuthenticated = !!this.bankService.getToken();
+  }
+
+  login(): void {
+    this.errorMessage = '';
+    this.authMessage = '';
+    this.bankService.login(this.username, this.password).subscribe({
+      next: (token) => {
+        this.bankService.setToken(token.access_token);
+        this.isAuthenticated = true;
+        this.authMessage = 'Authenticated successfully. You may now create an account.';
+      },
+      error: (error) => {
+        console.error('Login failed', error);
+        this.errorMessage = error?.error?.detail || 'Unable to login. Please verify credentials.';
+      }
+    });
+  }
 
   createAccount(): void {
     this.errorMessage = '';
