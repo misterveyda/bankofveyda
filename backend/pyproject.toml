@@ -1,0 +1,21 @@
+[project]
+name = "bankofveyda"
+version = "0.1.0"
+description = "Bank of Veyda fintech/regtech simulation backend"
+readme = "../README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Bank of Veyda" }
+]
+
+[project.dependencies]
+Django = "^4.4"
+psycopg[binary] = "^3.3"
+python-dotenv = "^1.0"
+
+environment = "python"
+
+[build-system]
+requires = ["setuptools>=68.0","wheel"]
+build-backend = "setuptools.build_meta"

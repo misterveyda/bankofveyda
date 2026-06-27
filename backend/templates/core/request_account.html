@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Request Temporary Account{% endblock %}
+
+{% block content %}
+<div class="panel" style="max-width: 640px; margin: 0 auto;">
+  <h1>Request Temporary Account</h1>
+  <p>Submit a new sandbox account request to begin onboarding and compliance review.</p>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+      <div class="form-group">
+        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {{ field.errors }}
+      </div>
+    {% endfor %}
+
+    <button type="submit" class="button">Submit request</button>
+  </form>
+</div>
+{% endblock %}

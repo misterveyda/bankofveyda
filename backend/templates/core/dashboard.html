@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Bank of Veyda{% endblock %}
+
+{% block content %}
+<div class="panel">
+  <h1>Overview</h1>
+  <p>Track temporary accounts, compliance status, risk scores, and identity events.</p>
+</div>
+
+<div class="summary-grid">
+  <div class="metric-card">
+    <h2>{{ active_accounts.count }}</h2>
+    <p class="metric-label">Active accounts</p>
+  </div>
+  <div class="metric-card">
+    <h2>{{ flagged_accounts.count }}</h2>
+    <p class="metric-label">High-risk accounts</p>
+  </div>
+  <div class="metric-card">
+    <h2>{{ pending_accounts.count }}</h2>
+    <p class="metric-label">Pending accounts</p>
+  </div>
+</div>
+
+<div class="panel">
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem;">
+    <h2>Active accounts</h2>
+    <a href="{% url 'request_account' %}" class="button button-secondary">Request new account</a>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Account</th><th>Owner</th><th>Balance</th><th>Risk</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      {% for account in active_accounts %}
+      <tr>
+        <td>{{ account.account_number }}</td>
+        <td>{{ account.owner.username }}</td>
+        <td>{{ account.balance }}</td>
+        <td>{{ account.risk_score }}</td>
+        <td>{{ account.get_status_display }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">No active accounts yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="panel">
+  <h2>Flagged accounts</h2>
+  <table>
+    <thead>
+      <tr><th>Account</th><th>Owner</th><th>Risk</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      {% for account in flagged_accounts %}
+      <tr>
+        <td>{{ account.account_number }}</td>
+        <td>{{ account.owner.username }}</td>
+        <td>{{ account.risk_score }}</td>
+        <td>{{ account.get_status_display }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="4">No flagged accounts.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Bank of Veyda{% endblock %}</title>
+  <style>
+    body { margin: 0; font-family: Inter, system-ui, sans-serif; background: #08101d; color: #f8fafc; }
+    .page-shell { max-width: 1080px; margin: 0 auto; padding: 1.5rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; }
+    .brand { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.06em; }
+    .nav a { color: #dbeafe; text-decoration: none; margin-left: 1rem; }
+    .panel { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 1rem; padding: 1.75rem; margin-bottom: 1.25rem; }
+    .button { display: inline-flex; align-items: center; justify-content: center; padding: 0.95rem 1.4rem; border-radius: 999px; border: none; background: #6366f1; color: white; text-decoration: none; font-weight: 600; }
+    .button-secondary { background: rgba(255,255,255,.08); color: #e2e8f0; }
+    .form-group { margin-bottom: 1rem; }
+    .form-label { display: block; margin-bottom: 0.4rem; color: #cbd5e1; }
+    .form-input, .form-textarea { width: 100%; padding: 0.9rem 1rem; border-radius: 0.85rem; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); color: #f8fafc; }
+    .form-textarea { min-height: 140px; resize: vertical; }
+    .errorlist { color: #fecaca; margin: 0.5rem 0 0; list-style: none; padding-left: 0; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: 0.95rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+    th { color: #93c5fd; text-align: left; }
+    .summary-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .metric-card { padding: 1.25rem; border-radius: 1rem; background: rgba(255,255,255,.05); }
+    .metric-label { color: #94a3b8; margin-top: 0.75rem; }
+    .notice { padding: 1rem 1.25rem; border-radius: 1rem; background: rgba(34,197,94,.12); color: #d1fae5; }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="header">
+      <div class="brand">Bank of Veyda</div>
+      <nav class="nav">
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'request_account' %}">Request Account</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+          <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

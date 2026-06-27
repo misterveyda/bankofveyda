@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """Bank of Veyda Backend - Compliance Simulator
 
 A sophisticated fintech simulator demonstrating KYC/AML compliance, account lifecycle management,
@@ -293,3 +294,47 @@ This is an educational project demonstrating fintech compliance concepts.
 """
 
 print(__doc__)
+=======
+# Bank of Veyda Backend
+
+This directory contains a Django backend for the Bank of Veyda fintech/regtech simulation.
+
+## Getting Started
+
+### Option 1: Local virtual environment
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -U pip
+pip install -e .
+cp .env.example .env
+python manage.py migrate
+python manage.py runserver
+```
+
+### Option 2: Docker Compose
+
+```bash
+cd backend
+docker compose up --build
+```
+
+Then open http://localhost:8000.
+
+### Django frontend
+
+- The dashboard is available at `/`
+- The new account request page is available at `/request-account/`
+
+### Seed sample data
+
+```bash
+python manage.py seed_data
+```
+
+### Notes
+
+- The app expects Postgres on `db:5432` when running in Docker.
+- Use `.env.example` to provide local database credentials.
+>>>>>>> db7bb07 (commit)
