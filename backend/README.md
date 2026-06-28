@@ -324,8 +324,16 @@ Then open http://localhost:8000.
 
 ### Django frontend
 
-- The dashboard is available at `/`
-- The new account request page is available at `/request-account/`
+- Dashboard: `/`
+- Request account: `/request-account/`
+- Compliance dashboard: `/compliance/`
+- Sign in: `/login/`
+- Sign up: `/signup/`
+
+### JSON API
+
+- Accounts: `/api/accounts/`
+- Transactions: `/api/transactions/`
 
 ### Seed sample data
 

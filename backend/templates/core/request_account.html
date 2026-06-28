@@ -1,25 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Request Temporary Account{% endblock %}
-
 {% block content %}
-<div class="panel" style="max-width: 640px; margin: 0 auto;">
-  <h1>Request Temporary Account</h1>
-  <p>Submit a new sandbox account request to begin onboarding and compliance review.</p>
+  <div class="panel">
+    <h1>Request temporary account</h1>
+    <p>Submit an onboarding request for a sandbox account with compliance tracking.</p>
 
-  <form method="post">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-
-    {% for field in form %}
-      <div class="form-group">
-        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+    <form method="post">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="form-errors">{{ form.non_field_errors }}</div>
+      {% endif %}
+      {% for field in form %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
         {{ field }}
         {{ field.errors }}
-      </div>
-    {% endfor %}
-
-    <button type="submit" class="button">Submit request</button>
-  </form>
-</div>
+      {% endfor %}
+      <button class="button" type="submit">Submit request</button>
+    </form>
+  </div>
 {% endblock %}

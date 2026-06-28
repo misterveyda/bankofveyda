@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="panel">
+    <h1>Compliance dashboard</h1>
+    <p>Review high-risk accounts and flagged transactions for regulatory oversight.</p>
+  </div>
+
+  <div class="panel">
+    <h2>Metrics</h2>
+    <ul>
+      <li>Total accounts: {{ metrics.total_accounts }}</li>
+      <li>Active accounts: {{ metrics.active_count }}</li>
+      <li>Frozen accounts: {{ metrics.frozen_count }}</li>
+      <li>Flagged accounts: {{ metrics.flagged_count }}</li>
+      <li>Total transaction volume: {{ metrics.total_volume }}</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2>High risk accounts</h2>
+    <table>
+      <tr><th>Account</th><th>Owner</th><th>Risk score</th><th>Status</th></tr>
+      {% for account in high_risk %}
+      <tr>
+        <td>{{ account.account_number }}</td>
+        <td>{{ account.owner.username }}</td>
+        <td>{{ account.risk_score }}</td>
+        <td>{{ account.status }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="4">No high-risk accounts.</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div class="panel">
+    <h2>Flagged transactions</h2>
+    <table>
+      <tr><th>Account</th><th>Amount</th><th>Type</th><th>Flagged</th><th>When</th></tr>
+      {% for transaction in recent_transactions %}
+      <tr>
+        <td>{{ transaction.account.account_number }}</td>
+        <td>{{ transaction.amount }}</td>
+        <td>{{ transaction.transaction_type }}</td>
+        <td>{{ transaction.flagged }}</td>
+        <td>{{ transaction.created_at }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">No flagged transactions.</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}
