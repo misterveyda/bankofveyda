@@ -45,6 +45,12 @@ def logout_view(request):
     return redirect('login')
 
 
+def home(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    return redirect('login')
+
+
 @login_required(login_url='login')
 def dashboard(request):
     active_accounts = Account.objects.filter(status='active')

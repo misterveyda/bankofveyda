@@ -329,6 +329,7 @@ Then open http://localhost:8000.
 - Compliance dashboard: `/compliance/`
 - Sign in: `/login/`
 - Sign up: `/signup/`
+- Password reset: `/password-reset/`
 
 ### JSON API
 
