@@ -22,7 +22,7 @@ EXPOSE 8000
 
 # Run application
 CMD ["python", "run.py"]
-=======
+
 FROM python:3.12-slim
 
 WORKDIR /app

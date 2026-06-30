@@ -1,4 +1,81 @@
 <<<<<<< HEAD
+<<<<<<< HEAD8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: bankofveyda-postgres
+    environment:
+      POSTGRES_DB: bankofveyda
+      POSTGRES_USER: bankofveyda
+      POSTGRES_PASSWORD: bankofveyda_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bankofveyda"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: bankofveyda-redis
+    ports:
+      - "6379:637"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    container_name: bankofveyda-api
+    command: python run.py
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://bankofveyda:bankofveyda_dev@postgres:5432/bankofveyda
+      REDIS_URL: redis://redis:6379/0
+      DEBUG: "True"
+      SECRET_KEY: "dev-secret-key-change-in-production"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - .:/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  celery:
+    build: .
+    container_name: bankofveyda-celery
+    command: celery -A app.workers.celery_app worker --loglevel=info --beat
+    environment:
+      DATABASE_URL: postgresql://bankofveyda:bankofveyda_dev@postgres:5432/bankofveyda
+      REDIS_URL: redis://redis:6379/0
+      DEBUG: "True"
+      SECRET_KEY: "dev-secret-key-change-in-production"
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - .:/app
+
+volumes:
+  postgres_data:
+  redis_data:
+=======
+version: '3.9
 version: '3.8'
 
 services:
@@ -33,7 +110,7 @@ services:
       retries: 5
 
   api:
-    build: .
+>>>>>>> db7bb07 (commit)    build: .
     container_name: bankofveyda-api
     command: python run.py
     ports:

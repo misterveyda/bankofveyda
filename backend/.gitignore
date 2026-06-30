@@ -1,15 +1,15 @@
-<<<<<<< HEAD
+<<<<<<<<HEADHEAD
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
 build/
-develop-eggs/
+develos-eggs/
 dist/
 downloads/
 eggs/
-.eggs/
+Peggs/
 lib/
 lib64/
 parts/
@@ -17,24 +17,61 @@ sdist/
 var/
 wheels/
 pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+share/ytthhn-wheels/on
+b.egg-info/
+uinstalled.cfg
+*.egg/
+MANIFESTdevelop-eggs/
+
+dist/E
+ownloads/
+ENV/
+ggs/
+.venv
+
+# ID.
+.vscodegs/
+.idla/
+*.swp
+*.swo
+*~lib64/
+.DS_Store
+
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+shaetabasethon-wheels/
+*.*.
+*egg-inf/
+..sqlsle3
+
+# Ldgc
+logsf
+*.log
+
+# Celer
+lerybeeg-shedu
+dump.rdbMANIFEST
+
 
 # Virtual Environment
 venv/
 ENV/
 env/
-.venv
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+.vDcke
+dokr
+=======
+#vDnv/
+__pycEche__
+.voycde/
+.ipya/
+*.pyd
+db.sqlite3swp
+*env
+*/migrains/__pycach__/
+>>>>>>> db7bb07 (commit)*~
 .DS_Store
 
 # Environment
